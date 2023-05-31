@@ -8,7 +8,7 @@ export class VampireActor extends Actor {
   /**
      * Augment the basic actor data with additional dynamic data.
      */
-  prepareData () {
+  prepareData() {
     super.prepareData()
 
     // const actorData = this.data
@@ -42,7 +42,8 @@ export class VampireActor extends Actor {
    * @return {Promise<Document>}  A Promise which resolves to the created Document
    * @memberof ClientDocumentMixin
    */
-  static async createDialog (data = {}, options = {}) {
+  static async createDialog(data = {}, options = {}) {
+    console.log("hello")
     // Collect data
     const documentName = this.metadata.name
     const types = game.system.documentTypes[documentName]

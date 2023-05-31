@@ -7,7 +7,7 @@
 
 export class CoterieActorSheet extends ActorSheet {
   /** @override */
-  static get defaultOptions () {
+  static get defaultOptions() {
     // Define the base list of CSS classes
     const classList = ['vtm5e', 'sheet', 'actor', 'coterie']
 
@@ -29,14 +29,14 @@ export class CoterieActorSheet extends ActorSheet {
     })
   }
 
-  constructor (actor, options) {
+  constructor(actor, options) {
     super(actor, options)
     this.locked = true
     this.isCharacter = false
   }
 
   /** @override */
-  get template () {
+  get template() {
     if (!game.user.isGM && this.actor.limited) return 'systems/vtm5e/templates/actor/limited-sheet.html'
     return 'systems/vtm5e/templates/actor/coterie-sheet.html'
   }
@@ -44,7 +44,7 @@ export class CoterieActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async getData () {
+  async getData() {
     const data = await super.getData()
     data.locked = this.locked
     data.isCharacter = this.isCharacter
@@ -75,7 +75,7 @@ export class CoterieActorSheet extends ActorSheet {
      *
      * @return {undefined}
      */
-  _prepareItems (sheetData) {
+  _prepareItems(sheetData) {
     const actorData = sheetData.actor
 
     const features = {
@@ -104,7 +104,7 @@ export class CoterieActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  activateListeners (html) {
+  activateListeners(html) {
     super.activateListeners(html)
     this._setupDotCounters(html)
 
@@ -167,7 +167,7 @@ export class CoterieActorSheet extends ActorSheet {
     }
   }
 
-  _setupDotCounters (html) {
+  _setupDotCounters(html) {
     html.find('.resource-value').each(function () {
       const value = Number(this.dataset.value)
       $(this).find('.resource-value-step').each(function (i) {
@@ -186,13 +186,13 @@ export class CoterieActorSheet extends ActorSheet {
     })
   }
 
-  _onToggleLocked (event) {
+  _onToggleLocked(event) {
     event.preventDefault()
     this.locked = !this.locked
     this._render()
   }
 
-  _onDotCounterChange (event) {
+  _onDotCounterChange(event) {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
@@ -217,7 +217,7 @@ export class CoterieActorSheet extends ActorSheet {
     this._assignToActorField(fields, index + 1)
   }
 
-  _onDotCounterEmpty (event) {
+  _onDotCounterEmpty(event) {
     event.preventDefault()
     const element = event.currentTarget
     const parent = $(element.parentNode)
@@ -236,7 +236,7 @@ export class CoterieActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @protected
    */
-  _onItemCreate (event) {
+  _onItemCreate(event) {
     event.preventDefault()
     const header = event.currentTarget
     // Get the type of item to create.
@@ -268,7 +268,7 @@ export class CoterieActorSheet extends ActorSheet {
     return this.actor.createEmbeddedDocuments('Item', [itemData])
   }
 
-  getItemDefaultName (type, data) {
+  getItemDefaultName(type, data) {
     if (type === 'feature') {
       return `${game.i18n.localize('VTM5E.' + data.featuretype.capitalize())}`
     }
@@ -282,7 +282,7 @@ export class CoterieActorSheet extends ActorSheet {
   }
 
   // There's gotta be a better way to do this but for the life of me I can't figure it out
-  _assignToActorField (fields, value) {
+  _assignToActorField(fields, value) {
     const actorData = duplicate(this.actor)
 
     // update actor owned items

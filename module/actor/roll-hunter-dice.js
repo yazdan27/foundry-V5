@@ -8,7 +8,7 @@
 // difficulty = The amount of successes required for a given roll
 // desperationDice = Additional desperation dice for the roll
 // subtractWillpower = Subtracts a point of willpower, always, if true
-export async function rollHunterDice (numDice, actor, label = '', difficulty = 0, desperationDice = 0, subtractWillpower = false) {
+export async function rollHunterDice(numDice, actor, label = '', difficulty = 0, desperationDice = 0, subtractWillpower = false) {
   // Roll defining and evaluating
   const dice = numDice
   const roll = new Roll(dice + 'dhcs>5 + ' + desperationDice + 'dscs>5', actor.system)

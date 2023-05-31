@@ -7,7 +7,7 @@
 
 export class CellActorSheet extends ActorSheet {
   /** @override */
-  static get defaultOptions () {
+  static get defaultOptions() {
     // Define the base list of CSS classes
     const classList = ['vtm5e', 'hunter-theme', 'sheet', 'actor', 'cell']
 
@@ -29,14 +29,14 @@ export class CellActorSheet extends ActorSheet {
     })
   }
 
-  constructor (actor, options) {
+  constructor(actor, options) {
     super(actor, options)
     this.locked = true
     this.isCharacter = false
   }
 
   /** @override */
-  get template () {
+  get template() {
     if (!game.user.isGM && this.actor.limited) return 'systems/vtm5e/templates/actor/limited-sheet.html'
     return 'systems/vtm5e/templates/actor/cell-sheet.html'
   }
@@ -44,7 +44,7 @@ export class CellActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async getData () {
+  async getData() {
     const data = await super.getData()
     data.locked = this.locked
     data.isCharacter = this.isCharacter
@@ -78,7 +78,7 @@ export class CellActorSheet extends ActorSheet {
      *
      * @return {undefined}
      */
-  _prepareItems (sheetData) {
+  _prepareItems(sheetData) {
     const actorData = sheetData.actor
 
     const features = {
@@ -107,7 +107,7 @@ export class CellActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  activateListeners (html) {
+  activateListeners(html) {
     super.activateListeners(html)
     this._setupDotCounters(html)
     this._setupCellSquareCounters(html)
@@ -175,7 +175,7 @@ export class CellActorSheet extends ActorSheet {
   }
 
   // Added for Desperation and Danger Counters
-  _onCellSquareCounterChange (event) {
+  _onCellSquareCounterChange(event) {
     event.preventDefault()
     const element = event.currentTarget
     const index = Number(element.dataset.index)
@@ -225,7 +225,7 @@ export class CellActorSheet extends ActorSheet {
     this._assignToActorField(fields, newValue)
   }
 
-  _setupCellSquareCounters (html) {
+  _setupCellSquareCounters(html) {
     html.find('.cell-resource-counter').each(function () {
       const data = this.dataset
       const states = parseCounterStates(data.states)
@@ -258,7 +258,7 @@ export class CellActorSheet extends ActorSheet {
     })
   }
 
-  _onResourceChange (event) {
+  _onResourceChange(event) {
     event.preventDefault()
     const actorData = duplicate(this.actor)
     const element = event.currentTarget
@@ -280,7 +280,7 @@ export class CellActorSheet extends ActorSheet {
     this.actor.update(actorData)
   }
 
-  _setupDotCounters (html) {
+  _setupDotCounters(html) {
     html.find('.resource-value').each(function () {
       const value = Number(this.dataset.value)
       $(this).find('.resource-value-step').each(function (i) {
@@ -299,13 +299,13 @@ export class CellActorSheet extends ActorSheet {
     })
   }
 
-  _onToggleLocked (event) {
+  _onToggleLocked(event) {
     event.preventDefault()
     this.locked = !this.locked
     this._render()
   }
 
-  _onDotCounterChange (event) {
+  _onDotCounterChange(event) {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
@@ -330,7 +330,7 @@ export class CellActorSheet extends ActorSheet {
     this._assignToActorField(fields, index + 1)
   }
 
-  _onDotCounterEmpty (event) {
+  _onDotCounterEmpty(event) {
     event.preventDefault()
     const element = event.currentTarget
     const parent = $(element.parentNode)
@@ -349,7 +349,7 @@ export class CellActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @protected
    */
-  _onItemCreate (event) {
+  _onItemCreate(event) {
     event.preventDefault()
     const header = event.currentTarget
     // Get the type of item to create.
@@ -381,7 +381,7 @@ export class CellActorSheet extends ActorSheet {
     return this.actor.createEmbeddedDocuments('Item', [itemData])
   }
 
-  getItemDefaultName (type, data) {
+  getItemDefaultName(type, data) {
     if (type === 'feature') {
       return `${game.i18n.localize('VTM5E.' + data.featuretype.capitalize())}`
     }
@@ -395,7 +395,7 @@ export class CellActorSheet extends ActorSheet {
   }
 
   // There's gotta be a better way to do this but for the life of me I can't figure it out
-  _assignToActorField (fields, value) {
+  _assignToActorField(fields, value) {
     const actorData = duplicate(this.actor)
 
     // update actor owned items
@@ -414,7 +414,7 @@ export class CellActorSheet extends ActorSheet {
   }
 }
 
-function parseCounterStates (states) {
+function parseCounterStates(states) {
   return states.split(',').reduce((obj, state) => {
     const [k, v] = state.split(':')
     obj[k] = v

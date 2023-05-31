@@ -504,7 +504,7 @@ Hooks.once('ready', function () {
   migrateWorld()
 })
 
-async function willpowerReroll (roll) {
+async function willpowerReroll(roll) {
   // Variables
   const dice = roll.find('.normal-dice')
   const diceRolls = []
@@ -560,7 +560,7 @@ async function willpowerReroll (roll) {
 }
 
 // Handles selecting and de-selecting the die
-function dieSelect () {
+function dieSelect() {
   // If the die isn't already selected and there aren't 3 already selected, add selected to the die
   if (!($(this).hasClass('selected')) && ($('.willpower-reroll .selected').length < 3)) {
     $(this).addClass('selected')
@@ -572,7 +572,7 @@ function dieSelect () {
 // Handles rerolling the number of dice selected
 // TODO: Make this function duplicate/replace the previous roll with the new results
 // For now this works well enough as "roll three new dice"
-function rerollDie (roll) {
+function rerollDie(roll) {
   // Variables
   const diceSelected = $('.willpower-reroll .selected').length
 
@@ -602,7 +602,7 @@ function rerollDie (roll) {
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
-async function createVampireMacro (data, slot) {
+async function createVampireMacro(data, slot) {
   if (data.type !== 'Item') return
   if (!('data' in data)) return ui.notifications.warn('You can only create macro buttons for owned Items')
   const item = data.system
@@ -629,7 +629,7 @@ async function createVampireMacro (data, slot) {
  * @param {string} itemName
  * @return {Promise}
  */
-function rollItemMacro (itemName) {
+function rollItemMacro(itemName) {
   const speaker = ChatMessage.getSpeaker()
   let actor
   if (speaker.token) actor = game.actors.tokens[speaker.token]
